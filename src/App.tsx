@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { ThemeProvider } from "@/components/theme-provider";
 
 import DashboardPage from "./pages/DashboardPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
@@ -13,26 +13,27 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-
 const App = () => (
 <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-    <Toaster />
-    <Sonner />
-    <BrowserRouter>
-        <Routes>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+            <Routes>
 
 
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/sign-up" element={<SignUpPage />} />
-          {/* catch-all */}
-          <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/sign-up" element={<SignUpPage />} />
+            {/* catch-all */}
+            <Route path="*" element={<NotFound />} />
 
 
-        </Routes>
-    </BrowserRouter>
+            </Routes>
+        </BrowserRouter>
+    </ThemeProvider>
     </TooltipProvider>
 </QueryClientProvider>
 );
